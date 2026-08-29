@@ -4,6 +4,11 @@ import { useAuth } from "../context/AuthContext.jsx";
 export default function Sidebar() {
   const { user, logout } = useAuth();
 
+  function handleLogout() {
+    logout();
+    navigate("/admin");
+  }
+
   return (
     <aside className="sidebar">
       <div className="auth-brand">

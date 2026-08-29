@@ -30,6 +30,11 @@ const leadSchema = new mongoose.Schema(
       trim: true,
       default: "Website",
     },
+    message: {
+      type: String,
+      trim: true,
+      maxlength: 2000,
+    },
     status: {
       type: String,
       enum: ["new", "contacted", "converted"],

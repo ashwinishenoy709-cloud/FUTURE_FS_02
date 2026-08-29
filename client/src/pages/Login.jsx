@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import { api } from "../api.js";
@@ -14,30 +14,15 @@ export default function Login() {
 
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [registrationAllowed, setRegistrationAllowed] = useState(false);
-
-  useEffect(() => {
-    async function checkSetup() {
-      try {
-        const data = await api.setupStatus();
-        setRegistrationAllowed(data.registrationAllowed);
-      } catch (err) {
-        console.error("Could not check setup status:", err);
-      }
-    }
-
-    checkSetup();
-  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     setError("");
     setSubmitting(true);
 
     try {
       await login(form.email, form.password);
-      navigate("/");
+      navigate("/admin/dashboard");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -103,15 +88,6 @@ export default function Login() {
             {submitting ? "Signing in…" : "Sign in"}
           </button>
         </form>
-
-        {registrationAllowed && (
-          <p className="auth-switch">
-            New here?{" "}
-            <Link to="/register">
-              Create the admin account
-            </Link>
-          </p>
-        )}
       </div>
     </div>
   );

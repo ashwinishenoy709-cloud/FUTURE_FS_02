@@ -4,6 +4,36 @@ const { protect } = require("../middleware/auth");
 
 const router = express.Router();
 
+router.post("/public", async (req, res) => {
+  try {
+    const { name, email, message, source } = req.body;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        message: "Name, email and message are required",
+      });
+    }
+
+    const lead = await Lead.create({
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      message: message.trim(),
+      source: source?.trim() || "Website",
+      status: "new",
+      priority: "medium",
+    });
+
+    res.status(201).json({
+      message: "Thank you! Our team will contact you soon.",
+      leadId: lead._id,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not submit your enquiry",
+    });
+  }
+});
+
 router.use(protect);
 
 // @route  GET /api/leads

@@ -10,7 +10,7 @@ const analyticsRoutes = require("./routes/analytics");
 const app = express();
 
 // --- Middleware ---
-const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173")
+const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5174")
   .split(",")
   .map((origin) => origin.trim());
 
