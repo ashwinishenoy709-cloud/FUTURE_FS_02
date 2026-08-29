@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { api } from "../api.js";
 
 export default function PublicHome() {
@@ -165,6 +166,12 @@ export default function PublicHome() {
           )}
         </section>
       </main>
+      <footer className="public-footer">
+        <p>© 2026 ApexLead. All rights reserved.</p>
+        <Link to="/admin" className="staff-portal-link">
+            Staff Portal
+        </Link>
+        </footer>
     </div>
   );
 }
