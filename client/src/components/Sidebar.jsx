@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext.jsx";
+import ThemeToggle from "./ThemeToggle.jsx";
 
 export default function Sidebar() {
   const { user, logout } = useAuth();
@@ -14,6 +15,11 @@ export default function Sidebar() {
       <div className="auth-brand">
         <span className="mark" />
         <span>ApexLead</span>
+      </div>
+
+      <div className="sidebar-theme">
+        <span>Appearance</span>
+        <ThemeToggle />
       </div>
 
       <div className="sidebar-user">
