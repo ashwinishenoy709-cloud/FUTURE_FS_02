@@ -1,80 +1,138 @@
-# ApexLead
+# ApexLead – Lead Management CRM
 
-ApexLead is a lightweight CRM application designed to help small businesses manage client leads from initial contact to conversion. It provides a centralized dashboard for tracking leads, updating their progress, managing follow-ups, and monitoring conversion activity.
+ApexLead is a full-stack Customer Relationship Management (CRM) application designed to help businesses capture, organize, and manage customer leads efficiently.
+
+The application provides a public website where potential customers can submit inquiries and a secure admin dashboard where leads can be tracked from initial inquiry to conversion.
 
 ## Features
 
-- Secure admin authentication using JWT
-- Create, view, update, and delete leads
-- Track leads through New, Contacted, and Converted stages
-- Add follow-up notes to individual leads
+### Public Website
+
+- Responsive business landing page
+- Light and dark mode
+- Features and workflow sections
+- Customer inquiry/contact form
+- Automatic lead creation from submitted inquiries
+- Staff portal for admin access
+
+### Admin Dashboard
+
+- Secure admin authentication
+- JWT-based protected routes
+- View and manage customer leads
+- Add leads manually
 - Search and filter leads
-- Track lead sources
-- View lead and conversion statistics
-- Persistent data storage with MongoDB
-- Responsive dashboard interface
+- Lead status tracking:
+  - New
+  - Contacted
+  - Converted
+- Lead priority:
+  - Low
+  - Medium
+  - High
+- Follow-up date management
+- Notes for individual leads
+- Lead analytics and conversion rate
+- Light and dark mode
+
+## How It Works
+
+1. A customer submits an inquiry through the public website.
+2. The inquiry is automatically added to the CRM as a new lead.
+3. The admin can review the lead and assign a priority.
+4. The lead can be updated from **New → Contacted → Converted**.
+5. Follow-up dates and notes help track further communication.
+6. Dashboard analytics provide an overview of lead activity and conversions.
+
+## Demo Access
+
+The public website can be accessed without authentication.
+
+To explore the CRM admin dashboard, use the following demo credentials:
+
+**Admin Portal:** `/admin`
+
+```text
+Email: demo@example.com
+Password: <demo-password>
+```
 
 ## Tech Stack
 
 **Frontend**
 - React.js
-- JavaScript
-- CSS
 - Vite
+- React Router
+- CSS
+- Lucide React
 
 **Backend**
 - Node.js
 - Express.js
-- REST API
 - JWT Authentication
+- bcrypt
 
 **Database**
 - MongoDB
 - Mongoose
 
 **Deployment**
-- Vercel — Frontend
-- Render — Backend
-- MongoDB Atlas — Database
+- Vercel – Frontend
+- Render – Backend
+- MongoDB Atlas – Database
 
 ## Project Structure
 
 ```text
 ApexLead/
-├── client/                 # React frontend
-│   └── src/
-│       ├── components/
-│       ├── context/
-│       ├── pages/
-│       └── api.js
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   ├── styles/
+│   │   ├── api.js
+│   │   └── App.jsx
+│   └── package.json
 │
-├── server/                 # Node.js / Express backend
-│   ├── config/
+├── server/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   └── server.js
+│   ├── server.js
+│   └── package.json
 │
 └── README.md
 ```
 
-## Getting Started
+## Running the Project Locally
 
-### 1. Clone the repository
+Clone the repository:
 
 ```bash
 git clone <your-repository-url>
-cd ApexLead
+cd <repository-name>
 ```
 
-### 2. Install backend dependencies
+Install frontend dependencies:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Install backend dependencies in another terminal:
 
 ```bash
 cd server
 npm install
+npm run dev
 ```
 
-Create a `.env` file inside the `server` directory:
+## Environment Variables
+
+Create the required `.env` files and configure variables such as:
 
 ```env
 MONGO_URI=your_mongodb_connection_string
@@ -83,60 +141,28 @@ JWT_EXPIRES_IN=7d
 CLIENT_ORIGIN=http://localhost:5174
 ```
 
-Start the backend:
+For the frontend:
 
-```bash
-npm run dev
+```env
+VITE_API_URL=http://localhost:5000/api
 ```
 
-The API will run on:
+> Environment files and secret credentials should never be committed to GitHub.
 
-```text
-http://localhost:5000
-```
+## Deployment
 
-### 3. Install frontend dependencies
+The application can be deployed using:
 
-Open another terminal:
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Database:** MongoDB Atlas
 
-```bash
-cd client
-npm install
-npm run dev
-```
-
-The frontend will run on:
-
-```text
-http://localhost:5174
-```
-
-## How It Works
-
-ApexLead provides a simple lead-management workflow:
-
-```text
-Lead Received
-      ↓
-     New
-      ↓
-  Contacted
-      ↓
-  Converted
-```
-
-Admins can manage lead information, record follow-up notes, update lead status, search and filter the pipeline, and monitor overall conversion performance from the dashboard.
+The frontend communicates with the deployed REST API, while MongoDB Atlas stores user and lead information.
 
 ## Future Improvements
 
-- Automatic website contact-form integration
-- Lead priority and follow-up scheduling
-- Activity history
-- Email notifications and reminders
-- Advanced lead analytics
-
-## Author
-
-**Ashwini Shenoy**
-
-Computer Science & Engineering Student
+- Email notifications for new leads
+- Follow-up reminders
+- Advanced analytics and charts
+- Lead export functionality
+- Improved mobile dashboard experience
