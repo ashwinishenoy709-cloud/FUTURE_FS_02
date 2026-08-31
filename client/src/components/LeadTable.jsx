@@ -1,8 +1,15 @@
 import React from "react";
 
 function formatDate(dateStr) {
+  if (!dateStr) return "—";
+
   const d = new Date(dateStr);
-  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+
+  return d.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
 export default function LeadTable({ leads, onSelect }) {
@@ -11,7 +18,10 @@ export default function LeadTable({ leads, onSelect }) {
       <div className="lead-table-wrap">
         <div className="empty-state">
           <div className="glyph">— no leads —</div>
-          <p>No leads match this view yet. New contact-form submissions will land here.</p>
+          <p>
+            No leads match this view yet. New contact-form submissions will land
+            here.
+          </p>
         </div>
       </div>
     );
@@ -31,19 +41,44 @@ export default function LeadTable({ leads, onSelect }) {
             <th>Added</th>
           </tr>
         </thead>
+
         <tbody>
           {leads.map((lead) => (
             <tr key={lead._id} onClick={() => onSelect(lead)}>
               <td>
-                <span className={`lead-row-signal signal-${lead.status}`} />
+                <span
+                  className={`lead-row-signal signal-${lead.status}`}
+                />
                 {lead.name}
               </td>
-              <td className="email-cell">{lead.email}</td>
-              <td>{lead.source || "—"}</td>
-              <td>
-                <span className={`status-pill ${lead.status}`}>{lead.status}</span>
+
+              <td className="email-cell">
+                {lead.email}
               </td>
-              <td className="timestamp-cell">{formatDate(lead.createdAt)}</td>
+
+              <td>
+                {lead.source || "—"}
+              </td>
+
+              <td>
+                <span className={`status-pill ${lead.status}`}>
+                  {lead.status}
+                </span>
+              </td>
+
+              <td>
+                <span className={`priority-pill ${lead.priority || "medium"}`}>
+                  {lead.priority || "medium"}
+                </span>
+              </td>
+
+              <td className="timestamp-cell">
+                {formatDate(lead.followUpDate)}
+              </td>
+
+              <td className="timestamp-cell">
+                {formatDate(lead.createdAt)}
+              </td>
             </tr>
           ))}
         </tbody>

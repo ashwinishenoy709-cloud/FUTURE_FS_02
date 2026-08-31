@@ -1809,3 +1809,30 @@ table.lead-table {
     gap: 10px;
   }
 }
+
+.priority-pill {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.priority-pill.low {
+  background: rgba(74, 199, 154, 0.12);
+  color: var(--green);
+}
+
+.priority-pill.medium {
+  background: var(--blue-dim);
+  color: var(--blue);
+}
+
+.priority-pill.high {
+  background: rgba(224, 100, 100, 0.12);
+  color: var(--red);
+}
