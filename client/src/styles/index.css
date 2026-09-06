@@ -1,4 +1,8 @@
 :root {
+  --card-border: rgba(100, 42, 94, 0.20);
+  --card-shadow: 0 5px 18px rgba(0, 27, 71, 0.08);  
+  --card-bg: #ffffff;
+
   /* Main palette */
   --plum: #642a5e;
   --violet: #a952b9;
@@ -54,11 +58,15 @@
 }
 
 [data-theme="dark"] {
+  --card-bg: #111b34;
+  --card-border: rgba(176, 187, 222, 0.22);
+  --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+
   --bg: #050914;
   --bg-secondary: #081225;
 
   --surface: #0b1426;
-  --surface-raised: #101b31;
+  --surface-raised: #111b34;
 
   --text: #f6f7fb;
   --text-muted: #9ca9c5;
@@ -525,25 +533,21 @@ button {
 
 .feature-card {
   min-height: 180px;
-
   padding: 30px;
-
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: 16px;
-
-  background: var(--surface);
-
-  box-shadow: var(--shadow);
-
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
   transition:
     transform 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-
-  border-color: color-mix(in srgb, var(--violet) 45%, var(--border));
+  border-color: rgba(169, 82, 185, 0.50);
+  box-shadow: 0 10px 28px rgba(100, 42, 94, 0.13);
 }
 
 .feature-number {
@@ -589,18 +593,23 @@ button {
 
 .process-card {
   padding: 28px 32px;
-
   display: flex;
   align-items: flex-start;
-
   gap: 28px;
-
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: 16px;
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
 
-  background: var(--surface);
-
-  box-shadow: var(--shadow);
+.process-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(169, 82, 185, 0.50);
+  box-shadow: 0 10px 28px rgba(100, 42, 94, 0.13);
 }
 
 .process-number {
@@ -671,13 +680,10 @@ button {
 
 .contact-card {
   padding: 34px;
-
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: 18px;
-
-  background: var(--surface);
-
-  box-shadow: var(--shadow);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
 }
 
 .contact-card h2 {
@@ -1069,22 +1075,38 @@ button {
 
 .sidebar {
   width: 232px;
-
   flex-shrink: 0;
-
   background: var(--panel);
-
   border-right: 1px solid var(--border);
-
   padding: 24px 18px;
-
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  transition:
+    width 0.25s ease,
+    padding 0.25s ease;
+}
+
+.sidebar.collapsed {
+  width: 82px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.sidebar-brand-row {
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 30px;
 }
 
 .sidebar .auth-brand {
   padding: 0 6px;
-
   margin-bottom: 34px;
 }
 
@@ -1682,34 +1704,75 @@ table.lead-table {
 
 @media (max-width: 860px) {
   .app-shell {
-    flex-direction: column;
-  }
-
-  .main-panel {
-    padding: 20px 18px 48px;
+    flex-direction: row;
   }
 
   .sidebar {
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-    padding: 14px 18px;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+    width: 82px;
+    min-height: 100vh;
+
+    padding: 20px 12px;
+
+    flex-direction: column;
+
+    border-right: 1px solid var(--border);
+    border-bottom: none;
   }
 
-  .sidebar .auth-brand {
-    margin-bottom: 0;
+  .sidebar-brand-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar-brand-logo {
+    width: 46px;
+  }
+
+  .sidebar-nav-item {
+    justify-content: center;
+
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .sidebar-nav-item span {
+    display: none;
   }
 
   .sidebar-theme {
-    margin-left: auto;
-    margin-bottom: 0;
+    justify-content: center;
+
+    padding: 0;
+
+    margin-top: 10px;
+  }
+
+  .sidebar-theme span {
+    display: none;
   }
 
   .sidebar-user {
+    display: block;
+
+    padding: 12px 0 0;
+  }
+
+  .sidebar-user .role,
+  .sidebar-user .name {
     display: none;
+  }
+
+  .sidebar-logout {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .sidebar-logout span {
+    display: none;
+  }
+
+  .main-panel {
+    padding: 20px 16px 48px;
   }
 }
 
@@ -1827,4 +1890,124 @@ table.lead-table {
 .priority-pill.high {
   background: rgba(224, 100, 100, 0.12);
   color: var(--red);
+}
+
+.public-brand-logo {
+  width: 170px;
+  height: auto;
+  display: block;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  margin-bottom: 28px;
+}
+
+.sidebar-brand-logo {
+  width: 155px;
+  height: auto;
+  display: block;
+}
+
+.auth-brand-logo {
+  width: 165px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .sidebar-brand-logo {
+    width: 135px;
+  }
+}
+
+.sidebar-icon-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.sidebar-collapse-btn {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 8px;
+  border: 1px solid var(--border);
+
+  background: var(--surface);
+  color: var(--text-muted);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-collapse-btn:hover {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 26px;
+}
+
+.sidebar-nav-item {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+.sidebar-nav-item:hover {
+  background: var(--blue-dim);
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.sidebar.collapsed .sidebar-nav-item {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar-logout {
+  width: 100%;
+
+  margin-top: 14px;
+  padding: 10px 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: transparent;
+  color: var(--text-muted);
+
+  white-space: nowrap;
+}
+
+.sidebar-logout:hover {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+.sidebar.collapsed .sidebar-logout {
+  padding-left: 0;
+  padding-right: 0;
 }

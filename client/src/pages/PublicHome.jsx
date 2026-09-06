@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ApexLeadLogo from "../components/ApexLeadLogo.jsx";
 
 import { api } from "../api.js";
 import ThemeToggle from "../components/ThemeToggle.jsx";
@@ -11,7 +12,6 @@ export default function PublicHome() {
     message: "",
     source: "Website",
   });
-
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -40,14 +40,11 @@ export default function PublicHome() {
 
   return (
     <div className="landing-page">
-
       {/* NAVBAR */}
       <header className="landing-nav">
         <a href="#home" className="landing-logo">
-          <span className="logo-mark" />
-          ApexLead
+          <ApexLeadLogo className="public-brand-logo" />
         </a>
-
         <nav className="landing-links">
           <a href="#home">Home</a>
           <a href="#features">Features</a>
@@ -56,7 +53,6 @@ export default function PublicHome() {
           </a>
           <a href="#contact">Contact</a>
         </nav>
-
         <div className="nav-actions">
           <ThemeToggle />
           <button className="nav-cta" onClick={scrollToContact} >
@@ -73,27 +69,23 @@ export default function PublicHome() {
           <div className="section-badge">
             SMART LEAD MANAGEMENT
           </div>
-
           <h1>
-            Turn every inquiry into a{" "}
+            Turn leads into lasting{" "}
             <span className="gradient-text">
-              meaningful opportunity.
+              customer relationships.
             </span>
           </h1>
-
           <p>
             ApexLead helps businesses capture,
             organize and follow up on incoming
             customer leads without losing track
             of important conversations.
           </p>
-
           <div className="hero-actions">
             <button className="primary-cta" onClick={scrollToContact} >
               Start an Inquiry
               <span>→</span>
             </button>
-
             <a href="#how-it-works" className="secondary-cta" >
               See how it works
             </a>
@@ -119,7 +111,6 @@ export default function PublicHome() {
         </div>
 
         <div className="feature-grid">
-
           <article className="feature-card">
             <span className="feature-number">
               01
@@ -183,7 +174,6 @@ export default function PublicHome() {
             real customer conversations.
           </p>
         </div>
-
         <div className="process-list">
           <div className="process-card">
             <span className="process-number">
@@ -251,7 +241,7 @@ export default function PublicHome() {
             LET'S TALK
           </div>
           <h2>
-            Have a project in mind?
+            Ready to get started?
           </h2>
           <p>
             Tell us what you're looking for.
@@ -372,7 +362,7 @@ export default function PublicHome() {
             © 2026 ApexLead
           </span>
           <Link to="/admin" className="staff-link" >
-            Staff Portal
+            Admin Portal
           </Link>
         </div>
       </footer>

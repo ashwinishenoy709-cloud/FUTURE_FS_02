@@ -5,6 +5,7 @@ import { useAuth } from "./context/AuthContext.jsx";
 import PublicHome from "./pages/PublicHome.jsx";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import Register from "./pages/Register.jsx";
 
 function ProtectedRoute({ children }) {
   const { token, loading } = useAuth();
@@ -24,6 +25,7 @@ export default function App() {
 
       {/* Admin Login */}
       <Route path="/admin" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* Private CRM */}
       <Route path="/admin/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> } />

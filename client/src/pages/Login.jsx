@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import { api } from "../api.js";
+import ApexLeadLogo from "../components/ApexLeadLogo.jsx";
 
 export default function Login() {
   const { login } = useAuth();
@@ -14,6 +15,21 @@ export default function Login() {
 
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  const [registrationAllowed, setRegistrationAllowed] = useState(false);
+
+  useEffect(() => {
+    async function checkSetup() {
+      try {
+        const data = await api.setupStatus();
+        setRegistrationAllowed(data.registrationAllowed);
+      } catch (err) {
+        console.error("Could not check setup status:", err);
+      }
+    }
+
+    checkSetup();
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,8 +50,7 @@ export default function Login() {
     <div className="auth-screen">
       <div className="auth-card">
         <div className="auth-brand">
-          <span className="mark" />
-          <span>ApexLead</span>
+          <ApexLeadLogo className="auth-brand-logo" />
         </div>
 
         <h1>Sign in</h1>
@@ -87,6 +102,14 @@ export default function Login() {
           >
             {submitting ? "Signing in…" : "Sign in"}
           </button>
+          {registrationAllowed && (
+            <p className="auth-switch">
+              New here?{" "}
+              <Link to="/register">
+                Create the admin account
+              </Link>
+            </p>
+          )}
         </form>
       </div>
     </div>
