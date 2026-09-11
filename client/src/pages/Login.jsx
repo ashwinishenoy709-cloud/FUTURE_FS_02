@@ -49,6 +49,10 @@ export default function Login() {
   return (
     <div className="auth-screen">
       <div className="auth-card">
+        <Link to="/" className="auth-back-link">
+            <span>←</span>
+            Back to Home
+          </Link>
         <div className="auth-brand">
           <ApexLeadLogo className="auth-brand-logo" />
         </div>

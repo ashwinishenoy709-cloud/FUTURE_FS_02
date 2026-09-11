@@ -63,9 +63,12 @@ export default function Register() {
   return (
     <div className="auth-screen">
       <div className="auth-card">
+        <Link to="/" className="auth-back-link">
+          <span>←</span>
+          Back to Home
+        </Link>
         <div className="auth-brand">
-          <span className="mark" />
-          <span>ApexLead</span>
+           <ApexLeadLogo className="auth-brand-logo" />
         </div>
 
         <h1>Create admin account</h1>
