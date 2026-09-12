@@ -73,7 +73,7 @@ export default function Dashboard() {
       <main className="main-panel">
         <div className="page-header">
           <div>
-            <h1>Pipeline</h1>
+            <h1>Lead Pipeline</h1>
             <p className="sub">Every lead, from first contact to converted client.</p>
           </div>
           <button className="btn btn-primary" onClick={() => setShowNewModal(true)}>
